@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for certfile in imported-certs/*.pem; do
+	certfilename=$(basename -- "$certfile")
+	certfilealias="${certfilename%.*}"
+	$JAVA_HOME/bin/keytool -keystore cacerts -storepass changeit -noprompt -trustcacerts -importcert -alias $certfilealias -file $certfile
+done
